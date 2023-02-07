@@ -1,6 +1,6 @@
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
-import 'package:flutter_dojah_financial/flutter_dojah_financial.dart';
+import 'package:flutter_dojah_kyc/flutter_dojah_kyc.dart';
 import 'dart:convert';
 
 void main() async {
@@ -44,14 +44,15 @@ class _HomePageState extends State<HomePage> {
 // final appId= envVars['appId']; //your application ID
 // final publicKey = envVars['publicKey']; //your public key
 
-  final appId = ""; //your application ID
-  final publicKey = ""; //your public key
+  final appId = "6000604fb87ea60035ef41bb"; //your application ID
+  final publicKey = "prod_pk_7jspvKP2FMkjkSZx1qnbgiMWy"; //your public key
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Dojah Widget test"),
+        title: const Text("Dojah Widget"),
+        //backgroundColor: Colors.yellow,
         ),
         body: Center(
             child: Column(children: <Widget>[
@@ -62,28 +63,33 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(fontSize: 20.0),
               ),
               onPressed: () {
-                final userData = {
-                  "first_name": "Michael",
-                  "last_name": "Folayan",
-                  "dob": "1998-05-16",
-                  "residence_country": "Nigeria"
-                };
+                // final userData = {
+                //   "first_name": "Michael",
+                //   "last_name": "Folayan",
+                //   "dob": "1998-05-16",
+                //   "residence_country": "Nigeria"
+                // };
 
                 final configObj = {
                   "debug": "true",
-                  // "mobile": true,
-                  // "otp": false,
+                  // "mobile": true,22
+                  "otp": true,
                   // "selfie": true,
                   // "aml": false,
-                  // "webhook": true,
+                  "webhook": true,
                   "review_process": "Automatic",
                   "pages": [
                     // { "page": "phone-number", "config": { "verification": true } },
-                    // { "page": "government-data", "config": { "bvn": true, "nin": false, "dl": false, "mobile": false, "otp": false, "selfie": false } },
+                    { "page": "government-data", "config": { "bvn": true, "nin": false, "dl": false, "mobile": false, "otp": true, "selfie": false } },
 
-                    { "page": "user-data", "config": { "enabled": false } },
-                    { "page": "countries", "config": { "enabled": false } },
-                    { "page": "selfie", "config": { "verification": true }},
+                    //{ "page": "user-data", "config": { "enabled": false } },
+                    //{ "page": "countries", "config": { "enabled": false } },
+                   
+                    // { "page": "business-data", "config": {"cac": true, "tin": true, "verification": true} },
+                    // { "page": "business-id" },
+  
+                   // { "page": "selfie", "config": { "verification": true }},
+
 
                     // {"page": "address"},
                     // {
@@ -101,9 +107,9 @@ class _HomePageState extends State<HomePage> {
 
                 const referenceId = "123456789012a";
 
-                DojahFinancial? _dojahFinancial;
-                //Use your appId and publicKey
-                _dojahFinancial = DojahFinancial(
+                DojahKYC? _dojahKYC;
+                ///Use your appId and publicKey
+                _dojahKYC = DojahKYC(
                     appId: appId,
                     publicKey: publicKey,
                     type: "custom",
@@ -115,200 +121,16 @@ class _HomePageState extends State<HomePage> {
 
                 print(json.encode(configObj));
                 print(json.encode(configObj));
-                print(userData);
+                //print(userData);
                 print(configObj);
-                _dojahFinancial.open(context,
+                _dojahKYC.open(context,
                     onSuccess: (result) => print(result),
                     onClose: (close) => print('Widget Closed'),
                     onError: (error) => print(error));
               },
             ),
           ),
-          Container(
-            child: TextButton(
-              child: const Text(
-                'Link Widget',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              onPressed: () {
-                final userData = {
-                  "first_name": "Chijioke",
-                  "last_name": "Nna",
-                  "dob": "2022-03-12"
-                };
-                final configObj = {
-                  "debug": true,
-                  "mobile": true,
-                };
-                DojahFinancial? _dojahFinancial;
 
-                //Use your appId and publicKey
-                _dojahFinancial = DojahFinancial(
-                  appId: appId,
-                  publicKey: publicKey,
-                  type:
-                      "link", //'verification', 'identification', 'verification', 'liveness'
-                  userData: userData,
-                  config: configObj,
-                ); //Type can be link, identification, verification
-                _dojahFinancial.open(context,
-                    onSuccess: (result) => print(result),
-                    onClose: (close) => print('Widget Closed'),
-                    // ignore: avoid_print
-                    onError: (error) => print("widget Error" + error));
-              },
-            ),
-          ),
-          Container(
-            child: TextButton(
-              child: const Text(
-                'Payment Widget',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              onPressed: () {
-                final userData = {
-                  "first_name": "Chijioke",
-                  "last_name": "Nna",
-                  "dob": "2022-03-12"
-                };
-                final configObj = {
-                  "debug": true,
-                  "mobile": true,
-                };
-
-                DojahFinancial? _dojahFinancial;
-                //Use your appId and publicKey
-                _dojahFinancial = DojahFinancial(
-                  appId: appId,
-                  publicKey: publicKey,
-
-                  type:
-                      "payment", //'verification', 'identification', 'verification', 'liveness'
-                  userData: userData,
-                  config: configObj,
-                  amount: 100,
-                ); //Type can be link, identification, verification
-                _dojahFinancial.open(context,
-                    onSuccess: (result) => print(result),
-                    onClose: (close) => print('Widget Closed'),
-                    onError: (error) => print(error));
-              },
-            ),
-          ),
-          Container(
-            child: TextButton(
-              child: const Text(
-                'Identification Widget',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              onPressed: () {
-                final userData = {
-                  "first_name": "Chijioke",
-                  "last_name": "Nna",
-                  "dob": "2022-03-12"
-                };
-                final configObj = {
-                  "debug": true,
-                  "mobile": true,
-                  "otp": true,
-                  "selfie": true,
-                  "aml": false,
-                  "review_process":
-                      'Automatic', // Possible values are 'Automatic' and 'Manual'
-                };
-
-                DojahFinancial? _dojahFinancial;
-                //Use your appId and publicKey
-                _dojahFinancial = DojahFinancial(
-                  appId: appId,
-                  publicKey: publicKey,
-                  type:
-                      "identification", //'verification', 'identification', 'verification', 'liveness'
-                  userData: userData,
-                  config: configObj,
-                ); //Type can be link, identification, verification
-                _dojahFinancial.open(context,
-                    onSuccess: (result) => print(result),
-                    onClose: (close) => print('Widget Closed'),
-                    onError: (error) => print(error));
-              },
-            ),
-          ),
-          Container(
-            child: TextButton(
-              child: const Text(
-                'Verification Widget',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              onPressed: () {
-                final userData = {
-                  "first_name": "Chijioke",
-                  "last_name": "Nna",
-                  "dob": "2022-03-12"
-                };
-                final configObj = {
-                  "debug": true,
-                  "mobile": true,
-                  "otp": true,
-                  "selfie": true,
-                };
-
-                DojahFinancial? _dojahFinancial;
-                //Use your appId and publicKey
-                _dojahFinancial = DojahFinancial(
-                  appId: appId,
-                  publicKey: publicKey,
-                  type:
-                      "verification", //'verification', 'identification', 'verification', 'liveness'
-                  userData: userData,
-                  config: configObj,
-                ); //Type can be link, identification, verification
-                _dojahFinancial.open(context,
-                    onSuccess: (result) => print(result),
-                    onClose: (close) => print('Widget Closed'),
-                    onError: (error) => print(error));
-              },
-            ),
-          ),
-          Container(
-            child: TextButton(
-              child: const Text(
-                'Liveness Widget',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              onPressed: () async {
-                final userData = {
-                  "first_name": "Chijioke",
-                  "last_name": "Nna",
-                  "dob": "2022-03-12"
-                };
-                final configObj = {
-                  "debug": true,
-                  "mobile": true,
-                };
-
-//             var status = await Permission.camera.status;
-//             if (status.isDenied) {
-//   // We didn't ask for permission yet or the permission has been denied before but not permanently.
-// }
-                DojahFinancial? _dojahFinancial;
-
-                //Use your appId and publicKey
-                _dojahFinancial = DojahFinancial(
-                  appId: appId,
-                  publicKey: publicKey,
-                  type:
-                      "liveness", //a'verification', 'identification', 'verification', 'liveness'
-                  userData: userData,
-                  config: configObj,
-                ); //Type can be link, identification, verification
-                _dojahFinancial.open(context,
-                    onSuccess: (result) => print(result),
-                    onClose: (close) => print('Widget Closed'),
-                    onError: (error) => print(error));
-              },
-            ),
-          ),
         ])));
   }
 }
