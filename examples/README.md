@@ -3,12 +3,10 @@
 
 ![KYC WIDGET](../img/kyc.png)
 
-![FINANCIAL WIDGET](../img/financial.png)
-
 
 ## Installation
 
-First, add flutter_dojah_financial as a dependency in your `pubspec.yaml` file.
+First, add flutter_dojah_kyc as a dependency in your `pubspec.yaml` file.
 
 ### iOS
 Add the following keys to your Info.plist file, located in `<project root>/ios/Runner/Info.plist`:
@@ -58,15 +56,15 @@ final Map<String,dynamic> config = {
   otp: true, //for verification type
   selfie: true //for verification type
 };
- final DojahFinancial _dojahFinancial = DojahFinancial(
+ final DojahKYC _dojahKYC = DojahKYC(
     appId: 'xxxxxxxxxxxxxxx',
     publicKey: 'prod_pk_xxxxxxxxxxxxxx',
-    type : 'liveness'  //link, identification, verification, payment
+    type : 'custom' 
     config: config,
     referenceId : referenceId,
   );
 
-  _dojahFinancial.open(context, onSuccess: (result) {
+  _dojahKYC.open(context, onSuccess: (result) {
     print('$result');
   }, 
   onClose: (close) => print('Widget Closed'),
