@@ -1,5 +1,5 @@
 
-## Features [KYC AND FINANCIAL WIDGET]
+## Features [KYC WIDGET]
 
 ![KYC WIDGET](../img/kyc.png)
 
