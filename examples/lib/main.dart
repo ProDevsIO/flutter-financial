@@ -1,7 +1,8 @@
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
-import 'package:flutter_dojah_kyc/flutter_dojah_kyc.dart';
 import 'dart:convert';
+
+import 'package:flutter_dojah_financial/flutter_dojah_financial.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -51,8 +52,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        title: const Text("Dojah Widget"),
-        //backgroundColor: Colors.yellow,
+          title: const Text("Dojah Widget"),
+          //backgroundColor: Colors.yellow,
         ),
         body: Center(
             child: Column(children: <Widget>[
@@ -80,16 +81,25 @@ class _HomePageState extends State<HomePage> {
                   "review_process": "Automatic",
                   "pages": [
                     // { "page": "phone-number", "config": { "verification": true } },
-                    { "page": "government-data", "config": { "bvn": true, "nin": false, "dl": false, "mobile": false, "otp": true, "selfie": false } },
+                    {
+                      "page": "government-data",
+                      "config": {
+                        "bvn": true,
+                        "nin": false,
+                        "dl": false,
+                        "mobile": false,
+                        "otp": true,
+                        "selfie": false
+                      }
+                    },
 
                     //{ "page": "user-data", "config": { "enabled": false } },
                     //{ "page": "countries", "config": { "enabled": false } },
-                   
+
                     // { "page": "business-data", "config": {"cac": true, "tin": true, "verification": true} },
                     // { "page": "business-id" },
-  
-                   // { "page": "selfie", "config": { "verification": true }},
 
+                    // { "page": "selfie", "config": { "verification": true }},
 
                     // {"page": "address"},
                     // {
@@ -99,25 +109,24 @@ class _HomePageState extends State<HomePage> {
                   ]
                 };
 
-
-               
                 final metaData = {
                   "user_id": "81828289191919193882",
                 };
 
                 const referenceId = "123456789012a";
 
-                DojahKYC? _dojahKYC;
+                DojahFinancial? _dojahKYC;
+
                 ///Use your appId and publicKey
-                _dojahKYC = DojahKYC(
-                    appId: appId,
-                    publicKey: publicKey,
-                    type: "custom",
-                    //userData: userData,
-                    metaData: metaData,
-                    config: configObj,
-                    // referenceId: referenceId
-                  );
+                _dojahKYC = DojahFinancial(
+                  appId: appId,
+                  publicKey: publicKey,
+                  type: "custom",
+                  //userData: userData,
+                  metaData: metaData,
+                  config: configObj,
+                  // referenceId: referenceId
+                );
 
                 print(json.encode(configObj));
                 print(json.encode(configObj));
@@ -130,7 +139,6 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
-
         ])));
   }
 }

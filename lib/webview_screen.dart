@@ -18,6 +18,8 @@ class WebviewScreen extends StatefulWidget {
   final Function(dynamic) success;
   final Function(dynamic) error;
   final Function(dynamic) close;
+  final PreferredSizeWidget? appBar;
+
   const WebviewScreen({
     Key? key,
     required this.appId,
@@ -31,6 +33,7 @@ class WebviewScreen extends StatefulWidget {
     required this.success,
     required this.error,
     required this.close,
+    this.appBar,
   }) : super(key: key);
 
   @override
@@ -115,7 +118,6 @@ class Config {
   bool? otp;
   bool? selfie;
 
-
   Config({this.bvn, this.nin, this.dl, this.mobile, this.otp, this.selfie});
 
   Config.fromJson(Map<String, dynamic> json) {
@@ -167,7 +169,6 @@ class _WebviewScreenState extends State<WebviewScreen> {
     super.initState();
 
     initCameraPermissions();
-    
   }
 
   Future initCameraPermissions() async {
@@ -185,7 +186,6 @@ class _WebviewScreenState extends State<WebviewScreen> {
     Location location = Location();
 
     LocationData _locationData;
-
 
     _serviceEnabled = await location.serviceEnabled();
     if (!_serviceEnabled) {
@@ -241,6 +241,7 @@ class _WebviewScreenState extends State<WebviewScreen> {
       });
     }
   }
+
   // returns an object with the following keys - latitude, longitude, and timezone
 
   @override
@@ -259,9 +260,7 @@ class _WebviewScreenState extends State<WebviewScreen> {
     var needsCamera = config.selfie;
 
     if (needsCamera == true) {
-
-     initCameraPermissions();      
-     
+      initCameraPermissions();
     }
 
     var needsLocation =
@@ -274,9 +273,7 @@ class _WebviewScreenState extends State<WebviewScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Dojah Widget"),
-      ),
+      appBar: widget.appBar,
       body: isGranted
           ? InAppWebView(
               initialData: InAppWebViewInitialData(
@@ -353,6 +350,12 @@ class _WebviewScreenState extends State<WebviewScreen> {
                   },
                 );
               },
+              onLoadStop: (controller, uri) {
+                print(uri.toString());
+              },
+              onLoadStart: (controller, uri) {
+                print(uri.toString());
+              },
               androidOnPermissionRequest:
                   (controller, origin, resources) async {
                 return PermissionRequestResponse(
@@ -364,5 +367,3 @@ class _WebviewScreenState extends State<WebviewScreen> {
     );
   }
 }
-
-

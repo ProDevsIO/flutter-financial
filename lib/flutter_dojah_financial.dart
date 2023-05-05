@@ -13,8 +13,7 @@ class DojahFinancial {
   final Map<String, dynamic>? metaData;
   final Map<String, dynamic>? config;
   final Function(dynamic)? onCloseCallback;
-
-  
+  final PreferredSizeWidget? appBar;
 
   DojahFinancial({
     required this.appId,
@@ -26,6 +25,7 @@ class DojahFinancial {
     this.amount,
     this.referenceId,
     this.onCloseCallback,
+    this.appBar,
   });
 
   Future<void> open(BuildContext context,
@@ -36,6 +36,7 @@ class DojahFinancial {
       context,
       MaterialPageRoute(
         builder: (context) => WebviewScreen(
+          appBar: appBar,
           appId: appId,
           publicKey: publicKey,
           type: type,
@@ -47,9 +48,8 @@ class DojahFinancial {
           success: (result) {
             onSuccess!(result);
           },
-
           close: (close) {
-              onClose!(close);
+            onClose!(close);
           },
           error: (error) {
             onError!(error);

@@ -16,9 +16,9 @@ dependencies:
  
 
   cupertino_icons: ^1.0.2
-  flutter_dojah_kyc:
+  flutter_dojah_financial:
     git:
-      url: https://github.com/Tamunorth/Flutter_Google_Places_AutoComplete_TextField.git
+      url: https://github.com/ProDevsIO/flutter-financial.git
       ref: master
   json_annotation: ^4.4.0
   permission_handler:
