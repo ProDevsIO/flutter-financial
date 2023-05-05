@@ -16,9 +16,12 @@ dependencies:
  
 
   cupertino_icons: ^1.0.2
-  flutter_dojah_kyc: 0.1.9
+  flutter_dojah_kyc:
+    git:
+      url: https://github.com/Tamunorth/Flutter_Google_Places_AutoComplete_TextField.git
+      ref: master
   json_annotation: ^4.4.0
-  permission_handler: ^8.3.0
+  permission_handler:
   location: ^4.3.0
 
 
