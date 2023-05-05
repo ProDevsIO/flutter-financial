@@ -350,12 +350,6 @@ class _WebviewScreenState extends State<WebviewScreen> {
                   },
                 );
               },
-              onLoadStop: (controller, uri) {
-                print(uri.toString());
-              },
-              onLoadStart: (controller, uri) {
-                print(uri.toString());
-              },
               androidOnPermissionRequest:
                   (controller, origin, resources) async {
                 return PermissionRequestResponse(
