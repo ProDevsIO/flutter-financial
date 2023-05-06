@@ -45,8 +45,8 @@ class _HomePageState extends State<HomePage> {
 // final appId= envVars['appId']; //your application ID
 // final publicKey = envVars['publicKey']; //your public key
 
-  final appId = "6000604fb87ea60035ef41bb"; //your application ID
-  final publicKey = "prod_pk_7jspvKP2FMkjkSZx1qnbgiMWy"; //your public key
+  final appId = "6453dd67c9f31e0034f1c5f6"; //your application ID
+  final publicKey = "test_pk_VEQd77dXDM61vEURsJdErLxcV"; //your public key
 
   @override
   Widget build(BuildContext context) {
@@ -64,18 +64,18 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(fontSize: 20.0),
               ),
               onPressed: () {
-                // final userData = {
-                //   "first_name": "Michael",
-                //   "last_name": "Folayan",
-                //   "dob": "1998-05-16",
-                //   "residence_country": "Nigeria"
-                // };
+                final userData = {
+                  "first_name": "Michael",
+                  "last_name": "Folayan",
+                  "dob": "1998-05-16",
+                  "residence_country": "Nigeria"
+                };
 
                 final configObj = {
-                  "debug": "true",
-                  // "mobile": true,22
+                  "debug": true,
+                  "mobile": true,
                   "otp": true,
-                  // "selfie": true,
+                  "selfie": true,
                   // "aml": false,
                   "webhook": true,
                   "review_process": "Automatic",
@@ -99,13 +99,21 @@ class _HomePageState extends State<HomePage> {
                     // { "page": "business-data", "config": {"cac": true, "tin": true, "verification": true} },
                     // { "page": "business-id" },
 
-                    // { "page": "selfie", "config": { "verification": true }},
+                    {
+                      "page": "selfie",
+                      "config": {"verification": true}
+                    },
 
                     // {"page": "address"},
-                    // {
-                    //   "page": "id",
-                    //   "config": {"passport": false, "dl": true}
-                    // }
+                    {
+                      "page": 'id',
+                      "config": {
+                        "passport": true,
+                        "dl": true,
+                        "nin": true,
+                        "voter": true,
+                      }
+                    },
                   ]
                 };
 
@@ -122,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                   appId: appId,
                   publicKey: publicKey,
                   type: "custom",
-                  //userData: userData,
+                  userData: userData,
                   metaData: metaData,
                   config: configObj,
                   // referenceId: referenceId

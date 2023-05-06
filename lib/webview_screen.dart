@@ -326,6 +326,8 @@ class _WebviewScreenState extends State<WebviewScreen> {
               onWebViewCreated: (controller) {
                 _webViewController = controller;
 
+                readJS();
+
                 _webViewController?.addJavaScriptHandler(
                   handlerName: 'onSuccessCallback',
                   callback: (response) {
@@ -359,5 +361,11 @@ class _WebviewScreenState extends State<WebviewScreen> {
             )
           : const Center(child: CircularProgressIndicator()),
     );
+  }
+
+  void readJS() async {
+    String html = await _webViewController?.evaluateJavascript(
+        source: "window.document.getElementsByTagName('html')[0].outerHTML;");
+    print(html);
   }
 }

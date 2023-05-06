@@ -73,11 +73,9 @@ packages:
   flutter_dojah_financial:
     dependency: "direct main"
     description:
-      path: "."
-      ref: master
-      resolved-ref: "380b4de4a67de58a710ae8224af699924eb912cb"
-      url: "https://github.com/ProDevsIO/flutter-financial.git"
-    source: git
+      path: "/Users/tamunor/StudioProjects/flutter-financial-prodevs"
+      relative: false
+    source: path
     version: "0.0.9"
   flutter_inappwebview:
     dependency: transitive
@@ -141,10 +139,10 @@ packages:
     dependency: "direct main"
     description:
       name: location
-      sha256: "95f1fa3fafe7a09ba3b19565857ee2fdf465f319873389b37c4a729981e820c7"
+      sha256: "9051959f6f2ccadd887b28b66e9cbbcc25b6838e37cf9e894c421ccc0ebf80b5"
       url: "https://pub.dev"
     source: hosted
-    version: "4.3.0"
+    version: "4.4.0"
   location_platform_interface:
     dependency: transitive
     description:
